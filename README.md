@@ -77,7 +77,7 @@ $ python train.py --seed ${SEED} --cfg xlsum/${MODEL}/${TUNE}/${LANG}.cfg --run_
 
 # (2) Prefix-tuning, compare different prefix lengths (mBART only)
 $ export MODEL=mBART_large_50
-$ export TUNE=finetune  # options: [finetune, prefix]
+$ export TUNE=prefix
 $ export PREFIXLEN=200  # prefix length, options: [30, 50, 200, 300, 400]
 $ python train.py --seed ${SEED} --cfg xlsum/${MODEL}/${TUNE}/${PREFIXLEN}/${LANG}.cfg --run_name ${MODEL}_${TUNE}${PREFIXLEN}_${LANG} --logging_strategy steps --logging_first_step true --logging_steps 1000 --evaluation_strategy steps --eval_steps 100000 --metric_for_best_model avr --greater_is_better true --save_strategy steps --save_steps 100000 --save_total_limit 1 --load_best_model_at_end --gradient_accumulation_steps 4 --num_train_epochs ${EPOCH} --adafactor true --learning_rate ${LR} --do_train --do_eval --do_predict --predict_with_generate --output_dir output/${MODEL}_${TUNE}${PREFIXLEN}_${LANG}_seed${SEED}_lr${LR} --overwrite_output_dir --per_device_train_batch_size 8 --per_device_eval_batch_size 8 --generation_num_beams 4 --generation_max_length 60 --input_max_length 1024 --ddp_find_unused_parameters true
 
