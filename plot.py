@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 # plt.rcParams['font.sans-serif'] = ['Heiti TC']
 
 # Colors
-COLORS = ['#89c3eb', '#90e667', '#e0b5d3']
+COLORS = ['#89c3eb', '#90e667', '#e0b5d3', '#be1e3e']
 
 
 # 数据
@@ -33,6 +33,7 @@ plt.figure(figsize=(8, 4))
 plt.bar(x, mbart_finetune, width, label='FT', color=COLORS[0])
 plt.bar(x+width, mbart_prefix, width, label='PT', color=COLORS[1])
 plt.bar(x+width*2, mbart_lora, width, label='LoRA', color=COLORS[2])
+plt.ylabel("ROUGE-L", fontsize=12)
 plt.grid(axis='y', linestyle='--', alpha=0.5)
 
 # 添加标题和标签
@@ -58,25 +59,33 @@ plt.bar(x+width*2, mt5_lora, width, label='LoRA', color=COLORS[2])
 plt.grid(axis='y', linestyle='--', alpha=0.5)
 plt.tick_params(labelsize=11)
 plt.xticks(x+width, languages, fontsize=14)
+plt.ylabel("ROUGE-L", fontsize=12)
 plt.legend(fontsize=11)
 plt.savefig("fig/mt5-result.png")
 plt.show()
 
 # mbart, optimal length
 mbart_prefix_optlen = [26.56, 30.46, 27.98, 29.27, 25.15, 30.53, 33.25, 18.90, 24.66, 23.19, 25.79]
+mbart_prefix_optlen_len = [30, 100, 50, 100, 300, 300, 100, 100, 100, 200, 200]
 
 total_width, n = 0.72, 2
 width = total_width / n
 x = np.arange(len(languages))
 x = x - (total_width - width) / 2
 
-plt.figure(figsize=(8, 4))
-plt.bar(x, mbart_finetune, width, label='FT', color=COLORS[0])
-plt.bar(x+width, mbart_prefix_optlen, width, label='PT', color=COLORS[1])
-plt.grid(axis='y', linestyle='--', alpha=0.5)
-plt.tick_params(labelsize=11)
+# plt.figure(figsize=(8, 4))
+fig, ax1 = plt.subplots(figsize=(8, 4))
+ax1.bar(x, mbart_finetune, width, label='FT', color=COLORS[0])
+ax1.bar(x+width, mbart_prefix_optlen, width, label='PT', color=COLORS[1])
+ax1.grid(axis='y', linestyle='--', alpha=0.5)
+ax1.tick_params(labelsize=11)
 plt.xticks(x+width/2, languages, fontsize=14)
+plt.ylabel("ROUGE-L", fontsize=12)
 plt.legend(fontsize=11)
+
+ax2 = ax1.twinx()  # instantiate a second Axes that shares the same x-axis
+ax2.set_ylabel('optimal prefix length', color=COLORS[3], fontsize=12)
+ax2.scatter(x+width/2, mbart_prefix_optlen_len, marker="D", color=COLORS[3])
 plt.savefig("fig/mbart-opt-len.png")
 plt.show()
 
@@ -90,6 +99,7 @@ plt.bar(x+width, mbart_prefix_optlen_fewshot, width, label='PT', color=COLORS[1]
 plt.grid(axis='y', linestyle='--', alpha=0.5)
 plt.tick_params(labelsize=11)
 plt.xticks(x+width/2, languages, fontsize=14)
+plt.ylabel("ROUGE-L", fontsize=12)
 plt.legend(fontsize=11)
 plt.savefig("fig/mbart-few-shot.png")
 plt.show()
