@@ -11,7 +11,7 @@
 </p>
 
 This repository contains source code for NLPCC 2024 paper: 
-Leveraging Parameter-Efficient Fine-Tuning for Multilingual Abstractive Summarization
+[Leveraging Parameter-Efficient Fine-Tuning for Multilingual Abstractive Summarization](https://link.springer.com/chapter/10.1007/978-981-97-9437-9_23)
 
 
 ## Environment
@@ -138,10 +138,23 @@ For detailed configurations, please refer to [config](./config).
 - https://github.com/csebuetnlp/xl-sum
 
 
-[//]: # (## Citation)
+## Citation
 
-[//]: # (If you find our work helpful, please cite as:)
+If you find our work helpful, please cite as:
 
-[//]: # (```)
-[//]: # (TODO)
-[//]: # (```)
+```
+@InProceedings{10.1007/978-981-97-9437-9_23,
+author="Shen, Jialun
+and Wang, Yusong",
+editor="Wong, Derek F.
+and Wei, Zhongyu
+and Yang, Muyun",
+title="Leveraging Parameter-Efficient Fine-Tuning for Multilingual Abstractive Summarization",
+booktitle="Natural Language Processing and Chinese Computing",
+year="2025",
+publisher="Springer Nature Singapore",
+address="Singapore",
+pages="293--303",
+isbn="978-981-97-9437-9"
+}
+```
